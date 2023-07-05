@@ -23,7 +23,7 @@ const HomePage: FC = () => {
 				<div className='activity-box bg--white position--relative'>
 					<div
 						className='position--absolute plus-icon__btn cursor--pointer'
-						onClick={() => navigate('/settle-up')}
+						onClick={() => navigate('/expense')}
 					>
 						<PlusIcon height='50px' width='50px' />
 					</div>

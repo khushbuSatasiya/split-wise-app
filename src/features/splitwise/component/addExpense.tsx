@@ -23,7 +23,7 @@ const options: any = [
 
 const peopleArray = ['you', 'peter', 'justin', 'jack', 'lisa', 'joe'];
 
-const SettleUp: FC = () => {
+const AddExpense: FC = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -62,8 +62,7 @@ const SettleUp: FC = () => {
 					}}
 					validationSchema={settleUpFormValidationSchema}
 					onSubmit={(values: FormikValues) => {
-						console.log(values.paid_by, 'lll');
-
+						localStorage.setItem('settleData', JSON.stringify(values));
 						dispatch(createAction(actionTypes.GET_SETTLE_VALUE, values));
 						notify('save successfully', 'success');
 						navigate('/');
@@ -174,4 +173,4 @@ const SettleUp: FC = () => {
 	);
 };
 
-export default SettleUp;
+export default AddExpense;

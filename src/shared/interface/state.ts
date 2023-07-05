@@ -1,9 +1,9 @@
-import { IAuthState, ISettleData } from 'features/auth/interface/auth';
+import { IAuthState, IExpense } from 'features/auth/interface/auth';
 
 export interface IState {
 	loading: ILoadingState;
 	auth: IAuthState;
-	settle: ISettleData;
+	expense: IExpense;
 }
 
 export interface ILoadingState {

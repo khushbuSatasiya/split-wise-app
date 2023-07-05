@@ -4,13 +4,13 @@ import { IAction, IState } from 'shared/interface/state';
 
 import loadingReducer from './loadingReducer';
 import authReducer from 'features/auth/store/reducer';
-import settleReducer from 'features/splitwise/store/reducer';
+import expenseReducer from 'features/splitwise/store/reducer';
 import AuthService from 'shared/services/auth.service';
 
 const appReducer = combineReducers({
 	loading: loadingReducer,
 	auth: authReducer,
-	settle: settleReducer
+	expense: expenseReducer
 });
 
 const rootReducer = (state: IState | undefined, action: IAction) => {

@@ -18,7 +18,7 @@ export interface IUserData {
 	token: string;
 }
 
-export interface ISettleData {
+export interface IExpense {
 	name: string;
 	amount: string;
 	paid_by: string;

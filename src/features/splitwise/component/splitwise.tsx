@@ -12,7 +12,7 @@ import '../style/splitwise.scss';
 
 const SplitWise: FC = () => {
 	const navigate = useNavigate();
-	const settledData = useSelector((state: IState) => state.settle);
+	const settledData = useSelector((state: IState) => state.expense);
 
 	return (
 		<div>
