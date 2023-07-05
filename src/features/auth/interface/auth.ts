@@ -17,3 +17,10 @@ export interface IUserData {
 	name: string;
 	token: string;
 }
+
+export interface ISettleData {
+	name: string;
+	amount: string;
+	paid_by: string;
+	people_name: string[];
+}

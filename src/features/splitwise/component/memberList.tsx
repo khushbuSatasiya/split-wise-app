@@ -18,33 +18,33 @@ const MemberList: FC = () => {
 				</div>
 				<div className='flex align-items--center mb--15'>
 					<div className='profile display-flex-center border-radius--half bg--white text--primary font-size--default '>
+						P
+					</div>
+					<p className='ml--10'>Peter</p>
+				</div>
+				<div className='flex align-items--center mb--15'>
+					<div className='profile display-flex-center border-radius--half bg--white text--primary font-size--default '>
 						J
 					</div>
-					<p className='ml--10'>John Doe</p>
+					<p className='ml--10'>Justin</p>
 				</div>
 				<div className='flex align-items--center mb--15'>
 					<div className='profile display-flex-center border-radius--half bg--white text--primary font-size--default '>
-						P
+						J
 					</div>
-					<p className='ml--10'>Peter</p>
+					<p className='ml--10'>Jack</p>
 				</div>
 				<div className='flex align-items--center mb--15'>
 					<div className='profile display-flex-center border-radius--half bg--white text--primary font-size--default '>
-						P
+						L
 					</div>
-					<p className='ml--10'>Peter</p>
+					<p className='ml--10'>Lisa</p>
 				</div>
 				<div className='flex align-items--center mb--15'>
 					<div className='profile display-flex-center border-radius--half bg--white text--primary font-size--default '>
-						P
+						J
 					</div>
-					<p className='ml--10'>Peter</p>
-				</div>
-				<div className='flex align-items--center mb--15'>
-					<div className='profile display-flex-center border-radius--half bg--white text--primary font-size--default '>
-						P
-					</div>
-					<p className='ml--10'>Peter</p>
+					<p className='ml--10'>Joe</p>
 				</div>
 			</div>
 		</>

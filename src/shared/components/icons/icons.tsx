@@ -40,8 +40,8 @@ export const MemberIcon: FC<IIconProps> = ({ height, width, className }: IIconPr
 		viewBox='0 0 372.483 372.483'
 		stroke='#ffffff'
 	>
-		<g id='SVGRepo_bgCarrier' stroke-width='0' />
-		<g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round' />
+		<g id='SVGRepo_bgCarrier' />
+		<g id='SVGRepo_tracerCarrier' />
 		<g id='SVGRepo_iconCarrier'>
 			<g id='XMLID_10_'>
 				<g>
@@ -61,12 +61,22 @@ export const LeftArrowIcon: FC<IIconProps> = ({ height, width, className }: IIco
 		fill='#ffffff'
 		stroke='#ffffff'
 	>
-		<g id='SVGRepo_bgCarrier' stroke-width='0' />
+		<g id='SVGRepo_bgCarrier' />
 
-		<g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round' />
+		<g id='SVGRepo_tracerCarrier' />
 
 		<g id='SVGRepo_iconCarrier'>
 			<path d='M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z' fill='#ffffff' />
+		</g>
+	</svg>
+);
+
+export const RightIcon: FC<IIconProps> = ({ height, width, className }: IIconProps) => (
+	<svg viewBox='0,0,256,256' className={className || ''} width={width || '20'} height={height || '20'}>
+		<g fill='#ffffff' stroke='none'>
+			<g transform='scale(5.33333,5.33333)'>
+				<path d='M40.6,12.1l-23.6,23.6l-9.6,-9.6l-2.8,2.9l12.4,12.3l26.4,-26.4z' />
+			</g>
 		</g>
 	</svg>
 );

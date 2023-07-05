@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import { PASSWORD_VALIDATOR_REGEX } from './constants';
+import { errorMessages } from 'shared/constants/messages';
 
 const loginFormValidationSchema = Yup.object().shape({
 	email: Yup.string().email('Please Enter Valid Email').required('Please Enter Email').strict(true),
@@ -59,10 +60,19 @@ const resetPasswordFormValidationSchema = Yup.object().shape({
 		.strict(true)
 });
 
+const settleUpFormValidationSchema = Yup.object().shape({
+	name: Yup.string().required(errorMessages.required('You must Enter Expense Name')).strict(true),
+	amount: Yup.string().required(errorMessages.required('You must Enter amount')).strict(true)
+	// people_name: Yup.array()
+	// 	.of(Yup.boolean())
+	// 	.test('atLeastOneCheckbox', 'Select at least one checkbox', (values) => values.some((value) => value === true))
+});
+
 export {
 	loginFormValidationSchema,
 	forgotPasswordFormValidationSchema,
 	resetPasswordValidationSchema,
 	changePasswordValidationSchema,
-	resetPasswordFormValidationSchema
+	resetPasswordFormValidationSchema,
+	settleUpFormValidationSchema
 };

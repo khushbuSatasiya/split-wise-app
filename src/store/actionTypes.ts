@@ -6,3 +6,5 @@ export const UPDATE_USER_DATA = 'UPDATE_USER_DATA';
 
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
+
+export const GET_SETTLE_VALUE = 'GET_SETTLE_VALUE';
