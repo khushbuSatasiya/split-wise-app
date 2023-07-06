@@ -1,10 +1,8 @@
 import { FC } from 'react';
 
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { MemberIcon } from 'shared/components/icons/icons';
-import { IState } from 'shared/interface/state';
 
 import HomePage from './homepage';
 
@@ -12,7 +10,6 @@ import '../style/splitwise.scss';
 
 const SplitWise: FC = () => {
 	const navigate = useNavigate();
-	const settledData = useSelector((state: IState) => state.expense);
 
 	return (
 		<div>

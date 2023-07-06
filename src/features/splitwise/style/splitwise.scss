@@ -20,6 +20,13 @@
 	.activity-box {
 		width: 450px;
 		height: 430px;
+
+		.items {
+			width: 45px;
+			height: 45px;
+			border: 1px solid $primary;
+			border-radius: 12px;
+		}
 	}
 
 	.plus-icon__btn {

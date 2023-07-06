@@ -1,5 +1,5 @@
-import { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC, useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { ErrorMessage, Formik, FormikValues } from 'formik';
 import Select from 'react-select';
@@ -11,6 +11,8 @@ import { settleUpFormValidationSchema } from 'shared/constants/validation-schema
 import { useDispatch } from 'react-redux';
 import { createAction } from 'shared/util/utility';
 import { notify } from 'shared/components/notification/notification';
+import { isEmpty } from 'lodash';
+import { IExpense } from 'features/auth/interface/auth';
 
 const options: any = [
 	{ value: 'you', label: 'You' },
@@ -22,17 +24,27 @@ const options: any = [
 ];
 
 const peopleArray = ['you', 'peter', 'justin', 'jack', 'lisa', 'joe'];
+const expenseData: any = [];
 
 const AddExpense: FC = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const { id } = useParams();
 
-	const [selectedOption, setSelectedOption] = useState<any>(options[0]);
 	const [selectedValues, setSelectedValues] = useState<string[]>([]);
+	const [expenseDetail, setExpenseDetail] = useState<IExpense>({} as IExpense);
 
-	const handleSelectedOptions = (selectedValue: string) => {
-		setSelectedOption(selectedValue);
+	const getExpenseData: any = localStorage.getItem('expenseData');
+
+	const getExpenseDetail = () => {
+		if (id) {
+			setExpenseDetail(JSON.parse(getExpenseData)[id]);
+		}
 	};
+
+	useEffect(() => {
+		getExpenseDetail();
+	}, []);
 
 	const handleCheckValue = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
@@ -55,18 +67,38 @@ const AddExpense: FC = () => {
 			<div className='position--relative'>
 				<Formik
 					initialValues={{
-						name: '',
-						amount: '',
-						paid_by: 'you',
-						people_name: []
+						name: id ? expenseDetail.name : '',
+						amount: id ? expenseDetail.amount : '',
+						paid_by: id
+							? {
+									value: expenseDetail.paid_by,
+									label:
+										expenseDetail?.paid_by?.charAt(0).toUpperCase() +
+										expenseDetail?.paid_by?.slice(1)
+							  }
+							: 'you',
+						people_name: id ? expenseDetail.people_name : []
 					}}
 					validationSchema={settleUpFormValidationSchema}
 					onSubmit={(values: FormikValues) => {
-						localStorage.setItem('settleData', JSON.stringify(values));
+						if (id) {
+							const data = JSON.parse(localStorage.getItem('expenseData') as any);
+							const copyOfExpenseDetail = [...data];
+							const index = copyOfExpenseDetail.findIndex((item) => item.id === id);
+							copyOfExpenseDetail[index] = {
+								...values,
+								id: copyOfExpenseDetail[index].id
+							};
+							localStorage.setItem('expenseData', JSON.stringify(copyOfExpenseDetail));
+						} else {
+							expenseData.push({ ...values, id: expenseData.length + 1 });
+							localStorage.setItem('expenseData', JSON.stringify(expenseData));
+						}
 						dispatch(createAction(actionTypes.GET_SETTLE_VALUE, values));
 						notify('save successfully', 'success');
 						navigate('/');
 					}}
+					enableReinitialize
 				>
 					{({ setFieldValue, values, handleSubmit }) => {
 						return (
@@ -79,6 +111,7 @@ const AddExpense: FC = () => {
 										onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 											setFieldValue('name', event.target.value)
 										}
+										// defaultValue={JSON.parse(localStorage.getItem('expenseData')!)[id!].name}
 										value={values.name}
 										className='input-field no--bg text--white mt--40 p--10 font-size--xxl font--regular line-height--20'
 										placeholder='Expense Name'
@@ -111,12 +144,9 @@ const AddExpense: FC = () => {
 											</p>
 											<div className='input-select'>
 												<Select
-													value={selectedOption}
+													value={values.paid_by}
 													onChange={(value: any) => {
-														console.log(value.value);
-
-														handleSelectedOptions(value);
-														setFieldValue('paid_by', value.value);
+														setFieldValue('paid_by', value);
 													}}
 													options={options}
 													styles={CUSTOM_STYLE}
@@ -149,6 +179,11 @@ const AddExpense: FC = () => {
 																	const updatedData = handleCheckValue(event);
 																	setFieldValue('people_name', updatedData);
 																}}
+																checked={
+																	(values.people_name &&
+																		values.people_name.includes(data)) ||
+																	false
+																}
 															/>
 
 															<span className='checkmarks' />

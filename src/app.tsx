@@ -5,14 +5,17 @@ import Layout from 'hoc/layout/layout';
 import SplitWise from 'features/splitwise/component/splitwise';
 import MemberList from 'features/splitwise/component/memberList';
 import AddExpense from 'features/splitwise/component/addExpense';
+import ExpenseDetails from 'features/splitwise/component/expenseDetails';
 
 const App: React.FC = () => {
 	return (
 		<Layout>
 			<Routes>
 				<Route path='/' element={<SplitWise />} />
-				<Route path='/expense' element={<AddExpense />} />
+				<Route key={1} path='/expense' element={<AddExpense key={1} />} />
+				<Route key={2} path='/expense/:id' element={<AddExpense />} />
 				<Route path='/member-list' element={<MemberList />} />
+				<Route path='/:name/:index' element={<ExpenseDetails />} />
 			</Routes>
 		</Layout>
 	);
