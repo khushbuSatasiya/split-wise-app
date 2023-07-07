@@ -19,8 +19,12 @@ export interface IUserData {
 }
 
 export interface IExpense {
+	id: number;
 	name: string;
 	amount: string;
-	paid_by: string;
+	paid_by: {
+		label: string;
+		value: string;
+	};
 	people_name: string[];
 }

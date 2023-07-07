@@ -19,7 +19,7 @@
 
 	.activity-box {
 		width: 450px;
-		height: 430px;
+		height: 442px;
 
 		.items {
 			width: 45px;
@@ -30,8 +30,8 @@
 	}
 
 	.plus-icon__btn {
-		bottom: 10px;
-		right: 10px;
+		bottom: 0;
+		right: 0;
 	}
 	.member-icon__btn {
 		right: 10px;
@@ -114,9 +114,23 @@
 
 @media screen and (max-width: 425px) {
 	.box {
-		border-radius: unset !important;
+		width: 380px;
 		h4 {
 			@include padding(15px);
+		}
+		.activity-box {
+			width: 380px;
+			height: 412px;
+		}
+	}
+}
+
+@media screen and (max-width: 375px) {
+	.box {
+		width: 355px;
+
+		.activity-box {
+			width: 355px;
 		}
 	}
 }

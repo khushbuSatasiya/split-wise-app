@@ -4,9 +4,10 @@ import { IAction } from 'shared/interface/state';
 import * as actionTypes from 'store/actionTypes';
 
 const initialState: IExpense = {
+	id: 0,
 	name: '',
 	amount: '',
-	paid_by: 'you',
+	paid_by: { label: 'You', value: 'you' },
 	people_name: []
 };
 
@@ -17,7 +18,11 @@ const reducer = (state: IExpense = initialState, action: IAction) => {
 				...state,
 				name: action.payload.name,
 				amount: action.payload.amount,
-				paidBy: action.payload.paid_by,
+				paidBy: {
+					value: action.payload.paid_by.value,
+					label:
+						action.payload?.paid_by?.label.charAt(0).toUpperCase() + action.payload?.paid_by?.label.slice(1)
+				},
 				people_name: action.payload.people_name
 			};
 

@@ -38,7 +38,8 @@ const AddExpense: FC = () => {
 
 	const getExpenseDetail = () => {
 		if (id) {
-			setExpenseDetail(JSON.parse(getExpenseData)[id]);
+			const index = JSON.parse(getExpenseData).findIndex((data: any) => data.id === parseInt(id));
+			setExpenseDetail(JSON.parse(getExpenseData)[index]);
 		}
 	};
 
@@ -67,32 +68,40 @@ const AddExpense: FC = () => {
 			<div className='position--relative'>
 				<Formik
 					initialValues={{
-						name: id ? expenseDetail.name : '',
-						amount: id ? expenseDetail.amount : '',
+						name: id ? expenseDetail?.name : '',
+						amount: id ? expenseDetail?.amount : '',
 						paid_by: id
 							? {
-									value: expenseDetail.paid_by,
+									value: expenseDetail?.paid_by?.value,
 									label:
-										expenseDetail?.paid_by?.charAt(0).toUpperCase() +
-										expenseDetail?.paid_by?.slice(1)
+										expenseDetail?.paid_by?.label.charAt(0).toUpperCase() +
+										expenseDetail?.paid_by?.label.slice(1)
 							  }
-							: 'you',
-						people_name: id ? expenseDetail.people_name : []
+							: {
+									label: 'You',
+									value: 'you'
+							  },
+						people_name: id ? expenseDetail?.people_name : []
 					}}
 					validationSchema={settleUpFormValidationSchema}
 					onSubmit={(values: FormikValues) => {
 						if (id) {
 							const data = JSON.parse(localStorage.getItem('expenseData') as any);
 							const copyOfExpenseDetail = [...data];
-							const index = copyOfExpenseDetail.findIndex((item) => item.id === id);
+							const index = copyOfExpenseDetail.findIndex((item) => item.id === parseInt(id));
+
 							copyOfExpenseDetail[index] = {
 								...values,
 								id: copyOfExpenseDetail[index].id
 							};
 							localStorage.setItem('expenseData', JSON.stringify(copyOfExpenseDetail));
 						} else {
-							expenseData.push({ ...values, id: expenseData.length + 1 });
-							localStorage.setItem('expenseData', JSON.stringify(expenseData));
+							const localStore = JSON.parse(localStorage.getItem('expenseData') as string) || [];
+
+							const newObject: any = { ...values, id: localStore.length + 1 };
+							localStore.push(newObject);
+							expenseData.push(newObject);
+							localStorage.setItem('expenseData', JSON.stringify(localStore));
 						}
 						dispatch(createAction(actionTypes.GET_SETTLE_VALUE, values));
 						notify('save successfully', 'success');
