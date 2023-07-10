@@ -38,7 +38,7 @@ const AddExpense: FC = () => {
 
 	const getExpenseDetail = () => {
 		if (id) {
-			const index = JSON.parse(getExpenseData).findIndex((data: any) => data.id === parseInt(id));
+			const index = JSON.parse(getExpenseData).findIndex((data: IExpense) => data.id === parseInt(id));
 			setExpenseDetail(JSON.parse(getExpenseData)[index]);
 		}
 	};

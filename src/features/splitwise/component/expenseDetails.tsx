@@ -10,13 +10,13 @@ const ExpenseDetails: FC = () => {
 	const { id } = useParams();
 	const [expenseDetail, setExpenseDetail] = useState<IExpense>({} as IExpense);
 
-	const settleData: any = JSON.parse(localStorage.getItem('settledData') as string);
+	const settleData = JSON.parse(localStorage.getItem('settledData') as string) || [];
 
-	const getExpenseData: any = localStorage.getItem('expenseData');
+	const getExpenseData = localStorage.getItem('expenseData') as string;
 
 	const getExpenseDetail = () => {
-		const index = JSON.parse(getExpenseData).findIndex((item: any) => item.id === parseInt(id as any));
-		setExpenseDetail(JSON.parse(getExpenseData)[index as any]);
+		const index = JSON.parse(getExpenseData).findIndex((item: IExpense) => item.id === parseInt(id as string));
+		setExpenseDetail(JSON.parse(getExpenseData)[index as number]);
 	};
 
 	useEffect(() => {
@@ -25,7 +25,8 @@ const ExpenseDetails: FC = () => {
 
 	const handleDelete = () => {
 		const dummyExp = JSON.parse(getExpenseData);
-		const index = dummyExp.findIndex((item: any) => item.id === parseInt(id as any));
+		const index = dummyExp.findIndex((item: IExpense) => item.id === parseInt(id as string));
+
 		dummyExp.splice(index, 1);
 
 		localStorage.setItem('expenseData', JSON.stringify(dummyExp));
@@ -38,9 +39,9 @@ const ExpenseDetails: FC = () => {
 	};
 
 	const handleSettle = () => {
-		const dummyExp = JSON.parse(getExpenseData);
+		const dummyExp: any = JSON.parse(getExpenseData);
 
-		const index = dummyExp.findIndex((item: any) => item.id === parseInt(id as any));
+		const index: number = dummyExp.findIndex((item: IExpense) => item.id === parseInt(id as string));
 		settleData.push(dummyExp[index]);
 
 		dummyExp.splice(index, 1);
