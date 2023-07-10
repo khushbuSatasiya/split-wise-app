@@ -60,9 +60,9 @@ const HomePage: FC = () => {
 			<div className='display-flex-center flex--column'>
 				<div className='display-flex-center flex--column mt--20'>
 					<div className='display-flex-center group-name border-radius--half bg--white text--primary font-size--40'>
-						G
+						R
 					</div>
-					<p className='font-size--browser-default font--medium line-height--20 mt--15'>Group Name</p>
+					<p className='font-size--browser-default font--medium line-height--20 mt--15'>Room mates</p>
 
 					{totalOwe === 0 && totalBorrow === 0 && (
 						<p className='font-size--sm font--regular line-height--20 mt--15'>
@@ -181,7 +181,7 @@ const HomePage: FC = () => {
 						)}
 					</div>
 					<div
-						className='position--sticky flex justify-content--end plus-icon__btn cursor--pointer  '
+						className='position--absolute flex justify-content--end plus-icon__btn cursor--pointer  '
 						onClick={() => navigate('/expense')}
 					>
 						<PlusIcon height='50px' width='50px' />
