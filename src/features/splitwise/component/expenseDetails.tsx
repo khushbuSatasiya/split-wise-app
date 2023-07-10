@@ -10,13 +10,13 @@ const ExpenseDetails: FC = () => {
 	const { id } = useParams();
 	const [expenseDetail, setExpenseDetail] = useState<IExpense>({} as IExpense);
 
-	const settleData: any = JSON.parse(localStorage.getItem('settledData') as string);
+	const settleData = JSON.parse(localStorage.getItem('settledData') as string);
 
-	const getExpenseData: any = localStorage.getItem('expenseData');
+	const getExpenseData = localStorage.getItem('expenseData') as string;
 
 	const getExpenseDetail = () => {
 		const index = JSON.parse(getExpenseData).findIndex((item: any) => item.id === parseInt(id as any));
-		setExpenseDetail(JSON.parse(getExpenseData)[index as any]);
+		setExpenseDetail(JSON.parse(getExpenseData)[index as number]);
 	};
 
 	useEffect(() => {
@@ -25,10 +25,11 @@ const ExpenseDetails: FC = () => {
 
 	const handleDelete = () => {
 		const dummyExp = JSON.parse(getExpenseData);
-		const index = dummyExp.findIndex((item: any) => item.id === parseInt(id as any));
-		dummyExp.splice(index, 1);
+		const index = dummyExp.findIndex((item: any) => item.id === parseInt(id as string));
 
+		dummyExp.splice(index, 1);
 		localStorage.setItem('expenseData', JSON.stringify(dummyExp));
+
 		notify('Data Deleted', 'success');
 		navigate('/');
 	};
@@ -40,13 +41,14 @@ const ExpenseDetails: FC = () => {
 	const handleSettle = () => {
 		const dummyExp = JSON.parse(getExpenseData);
 
-		const index = dummyExp.findIndex((item: any) => item.id === parseInt(id as any));
+		const index = dummyExp.findIndex((item: any) => item.id === parseInt(id as string));
 		settleData.push(dummyExp[index]);
 
 		dummyExp.splice(index, 1);
 		localStorage.setItem('expenseData', JSON.stringify(dummyExp));
 
 		localStorage.setItem('settledData', JSON.stringify(settleData));
+		navigate('/');
 	};
 
 	return (
@@ -55,14 +57,14 @@ const ExpenseDetails: FC = () => {
 				<div className='mt--15 ml--15 cursor--pointer' onClick={() => navigate(-1)}>
 					<LeftArrowIcon />
 				</div>
-				<div className='flex'>
+				<div className='flex' title='edit'>
 					<div className=' mr--20 mt--15 cursor--pointer' onClick={() => handleEdit()}>
 						<EditIcon />
 					</div>
-					<div className=' mr--15 mt--15 cursor--pointer' onClick={() => handleDelete()}>
+					<div className=' mr--15 mt--15 cursor--pointer' onClick={() => handleDelete()} title='delete'>
 						<DeleteIcon />
 					</div>
-					<div className=' mr--15 mt--15 cursor--pointer' onClick={() => handleSettle()}>
+					<div className=' mr--15 mt--15 cursor--pointer' onClick={() => handleSettle()} title='settle'>
 						<HansShakeIcon width='24px' height='24px' />
 					</div>
 				</div>

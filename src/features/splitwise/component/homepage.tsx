@@ -1,19 +1,21 @@
 import { FC, useEffect, useState } from 'react';
-import { IExpense } from 'features/auth/interface/auth';
 import { useNavigate } from 'react-router-dom';
+
+import { IExpense } from 'features/auth/interface/auth';
+
 import { PlusIcon } from 'shared/components/icons/icons';
 
 const HomePage: FC = () => {
 	const navigate = useNavigate();
 
-	const oweArray: any = [];
-	const borrowArray: any = [];
+	const oweArray: number[] = [];
+	const borrowArray: number[] = [];
 
 	const [totalOwe, setTotalOwe] = useState<number>(0);
 	const [totalBorrow, setTotalBorrow] = useState<number>(0);
 
 	// const expense = useSelector((state: IState) => state.expense);
-	const getExpenseData: any = localStorage.getItem('expenseData');
+	const getExpenseData = localStorage.getItem('expenseData') as string;
 
 	const expense = JSON.parse(getExpenseData);
 
@@ -62,14 +64,15 @@ const HomePage: FC = () => {
 					</div>
 					<p className='font-size--browser-default font--medium line-height--20 mt--15'>Group Name</p>
 
-					{getExpenseData?.length === 0 && (
+					{totalOwe === 0 && totalBorrow === 0 && (
 						<p className='font-size--sm font--regular line-height--20 mt--15'>
 							You are all settled up in this group.
 						</p>
 					)}
 
-					{getExpenseData?.length > 0 && totalOwe && (
+					{getExpenseData?.length > 0 && totalOwe > 0 && (
 						<>
+							{console.log('in')}
 							<p
 								className={`font-size--sm font--regular line-height--20 mt--15  ${
 									totalOwe < 0 && 'text--red-600'
@@ -80,7 +83,7 @@ const HomePage: FC = () => {
 						</>
 					)}
 
-					{getExpenseData?.length > 0 && totalBorrow && (
+					{getExpenseData?.length > 0 && totalBorrow > 0 && (
 						<>
 							<p
 								className={`font-size--sm font--regular line-height--20 mt--15  ${

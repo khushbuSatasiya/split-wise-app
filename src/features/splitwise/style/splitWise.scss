@@ -52,9 +52,6 @@
 	.input-field,
 	.input-select {
 		border-bottom: 1px solid $white;
-		::placeholder {
-			// color: #464748;
-		}
 	}
 
 	.save-btn {
@@ -109,6 +106,10 @@
 
 	.check-wrapper input:checked ~ .checkmarks:after {
 		display: block;
+	}
+
+	.settle-activity_box {
+		height: 635px;
 	}
 }
 

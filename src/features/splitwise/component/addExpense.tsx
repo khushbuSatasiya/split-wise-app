@@ -1,17 +1,18 @@
 import { FC, useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { ErrorMessage, Formik, FormikValues } from 'formik';
 import Select from 'react-select';
+import { ErrorMessage, Formik, FormikValues } from 'formik';
+
 import * as actionTypes from 'store/actionTypes';
 
 import { LeftArrowIcon, RightIcon } from 'shared/components/icons/icons';
 import { CUSTOM_STYLE } from 'shared/constants/constants';
 import { settleUpFormValidationSchema } from 'shared/constants/validation-schema';
-import { useDispatch } from 'react-redux';
 import { createAction } from 'shared/util/utility';
 import { notify } from 'shared/components/notification/notification';
-import { isEmpty } from 'lodash';
+
 import { IExpense } from 'features/auth/interface/auth';
 
 const options: any = [
@@ -24,7 +25,7 @@ const options: any = [
 ];
 
 const peopleArray = ['you', 'peter', 'justin', 'jack', 'lisa', 'joe'];
-const expenseData: any = [];
+const expenseData: string[] = [];
 
 const AddExpense: FC = () => {
 	const navigate = useNavigate();
@@ -34,7 +35,7 @@ const AddExpense: FC = () => {
 	const [selectedValues, setSelectedValues] = useState<string[]>([]);
 	const [expenseDetail, setExpenseDetail] = useState<IExpense>({} as IExpense);
 
-	const getExpenseData: any = localStorage.getItem('expenseData');
+	const getExpenseData = localStorage.getItem('expenseData') as string;
 
 	const getExpenseDetail = () => {
 		if (id) {
@@ -201,6 +202,9 @@ const AddExpense: FC = () => {
 													</div>
 												);
 											})}
+											<p className='text--red-100 mt--10'>
+												<ErrorMessage name='people_name' />
+											</p>
 										</div>
 									</div>
 								</div>

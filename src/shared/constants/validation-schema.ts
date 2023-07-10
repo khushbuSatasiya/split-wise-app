@@ -62,10 +62,11 @@ const resetPasswordFormValidationSchema = Yup.object().shape({
 
 const settleUpFormValidationSchema = Yup.object().shape({
 	name: Yup.string().required(errorMessages.required('You must Enter Expense Name')).strict(true),
-	amount: Yup.string().required(errorMessages.required('You must Enter amount')).strict(true)
-	// people_name: Yup.array()
-	// 	.of(Yup.boolean())
-	// 	.test('atLeastOneCheckbox', 'Select at least one checkbox', (values) => values.some((value) => value === true))
+	amount: Yup.string().required(errorMessages.required('You must Enter amount')).strict(true),
+	people_name: Yup.array()
+		.min(1, 'Select at least one person')
+		.of(Yup.string().required('Required!'))
+		.required('Select at least one person')
 });
 
 export {

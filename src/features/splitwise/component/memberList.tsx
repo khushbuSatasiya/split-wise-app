@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { LeftArrowIcon } from 'shared/components/icons/icons';
 
 const MemberList: FC = () => {

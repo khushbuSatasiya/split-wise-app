@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import '../../features/splitwise/style/splitwise.scss';
+import '../../features/splitwise/style/splitWise.scss';
 
 const Layout: React.FC<PropsWithChildren> = (props) => {
 	return (

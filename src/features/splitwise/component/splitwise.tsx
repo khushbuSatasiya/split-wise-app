@@ -6,7 +6,7 @@ import { MemberIcon } from 'shared/components/icons/icons';
 
 import HomePage from './homepage';
 
-import '../style/splitwise.scss';
+import '../style/splitWise.scss';
 
 const SplitWise: FC = () => {
 	const navigate = useNavigate();
